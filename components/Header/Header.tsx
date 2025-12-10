@@ -10,6 +10,9 @@ function Header() {
             <Link href="/">Home</Link>
           </li>
           <li className={css.navigation__element}>
+            <Link href="/profile">Profile</Link>
+          </li>
+          <li className={css.navigation__element}>
             <Link href="/todos">Todos</Link>
           </li>
         </ul>
