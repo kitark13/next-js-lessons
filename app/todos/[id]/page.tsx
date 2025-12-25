@@ -6,6 +6,7 @@ import {
 import { getTodo } from "@/services/todos";
 // import EditButon from "./EditButton";
 import TodoDetails from "./TodoDetails";
+import type { Metadata } from "next";
 interface TodoProp {
   params: Promise<{ id: string }>;
 }
@@ -25,6 +26,23 @@ interface TodoProp {
 // }
 
 // export default Todo;
+
+export const generateMetadata = async ({
+  params,
+}: TodoProp): Promise<Metadata> => {
+  const { id } = await params;
+  const todo = await getTodo(Number.parseInt(id, 10));
+  console.log(todo);
+
+  return {
+    title: todo.title,
+    description: `Description for Todo #${todo.id}`,
+    openGraph: {
+      title: todo.title,
+      description: `Description for Todo #${todo.id}`,
+    },
+  };
+};
 
 //  SSG
 async function Todo({ params }: TodoProp) {
