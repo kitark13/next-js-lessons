@@ -13,7 +13,12 @@ async function Todos() {
 
   return (
     <div>
-      <h1>Todos</h1>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <h1>Todos</h1>
+        <div>
+          <Link href="/todos/action/create">Create</Link>
+        </div>
+      </div>
 
       <ul style={{ paddingInline: "50px", listStyleType: "disc" }}>
         {todos.map((todo) => (
