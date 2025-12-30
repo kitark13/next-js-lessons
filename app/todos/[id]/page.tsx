@@ -7,6 +7,7 @@ import { getTodo } from "@/services/todos";
 // import EditButon from "./EditButton";
 import TodoDetails from "./TodoDetails";
 import type { Metadata } from "next";
+
 interface TodoProp {
   params: Promise<{ id: string }>;
 }
