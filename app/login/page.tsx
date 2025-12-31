@@ -1,17 +1,26 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useAuthStore } from "@/store/auth";
 import { login } from "@/services/auth";
+import type { ApiError } from "@/types/api";
 
 function Login() {
+  const setUser = useAuthStore((state) => state.setUser);
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
   const { mutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      console.log(data);
+      setUser(data);
+      router.push("/profile");
     },
     onError: (error) => {
-      console.error(error);
+      setError(
+        (error as ApiError).response?.data?.error ?? (error as ApiError).message
+      );
     },
   });
   const handleSubmit = (formData: FormData) => {
@@ -22,6 +31,7 @@ function Login() {
 
   return (
     <form action={handleSubmit}>
+      <p>{error}</p>
       <div>
         <label>
           Email:

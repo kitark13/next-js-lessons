@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import Header from "@/components/Header/Header";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 import TanstackProvider from "@/components/TanstackProvider/TanstackProvider";
 
 import "./globals.css";
@@ -32,17 +33,19 @@ export default function RootLayout({ children, preview }: RootLayoutProps) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <TanstackProvider>
-          <Header />
-          <div
-          // style={{
-          //   display: "grid",
-          //   gridTemplateColumns: "4fr 9fr",
-          //   gap: "16px",
-          // }}
-          >
-            {children}
-            {preview}
-          </div>
+          <AuthProvider>
+            <Header />
+            <div
+            // style={{
+            //   display: "grid",
+            //   gridTemplateColumns: "4fr 9fr",
+            //   gap: "16px",
+            // }}
+            >
+              {children}
+              {preview}
+            </div>
+          </AuthProvider>
         </TanstackProvider>
       </body>
     </html>

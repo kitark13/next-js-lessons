@@ -1,5 +1,6 @@
+import axios from "axios";
+
 import { NextRequest, NextResponse } from "next/server";
-import API from "../../api";
 import { Todo } from "@/types/todo";
 
 interface TodoProp {
@@ -8,6 +9,8 @@ interface TodoProp {
 
 export async function GET(request: NextRequest, { params }: TodoProp) {
   const { id } = await params;
-  const { data } = await API.get<Todo>(`/todos/${id}`);
+  const { data } = await axios.get<Todo>(
+    `https://jsonplaceholder.typicode.com/todos/${id}`
+  );
   return NextResponse.json(data);
 }
